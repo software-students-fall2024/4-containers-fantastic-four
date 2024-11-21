@@ -18,9 +18,9 @@ This app demonstrates how to perform flower classification using **transfer lear
 
 [Jessica Xu](https://github.com/Jessicakk0711)
 
-[ ]
+[Natalie Trump](https://github.com/nht251)
 
-[ ]
+[Alexandra Mastrangelo](https://github.com/alexandramastrangelo)
 
 ## Installation
 
