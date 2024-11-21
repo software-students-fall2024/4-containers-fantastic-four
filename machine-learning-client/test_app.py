@@ -4,10 +4,12 @@ This script tests each function independently to achieve a minimum of 80% code c
 """
 
 import os
+import io
 import pytest
 import torch
 from PIL import Image
 import torchvision.models
+from app import app
 from app import load_flower_names, load_model, transform_image, predict_plant
 
 # Constants for data paths
@@ -138,3 +140,31 @@ def test_predict_plant(monkeypatch):
     result = predict_plant(DATA_PATH)
     # Assert the expected result
     assert result == "Tulip"
+
+
+@pytest.fixture
+def create_flask_test_app():
+    """Create a test Flask app."""
+    app.testing = True
+    return app
+
+
+def test_predict_route(request, monkeypatch):
+    """Test the /predict route."""
+
+    # Explicitly retrieve the fixture without passing it as a parameter
+    flask_test_app = request.getfixturevalue("create_flask_test_app")
+
+    def mock_predict_plant(_):
+        """Mock predict_plant to return a valid result."""
+        return "Mocked Flower"
+
+    monkeypatch.setattr("app.predict_plant", mock_predict_plant)
+
+    with flask_test_app.test_client() as client:
+        data = {"image": (io.BytesIO(b"dummy image data"), "image.jpg")}
+        response = client.post(
+            "/predict", data=data, content_type="multipart/form-data"
+        )
+        assert response.status_code == 200
+        assert response.get_json() == {"plant_name": "Mocked Flower"}

@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/jessica/Desktop/Software Engineer/4-containers-fantastic-four/machine-learning-client/plant-ml-env/bin/python3.9" "$0" "$@"
+'''exec' "/Users/jessica/Desktop/Software Engineer/4-containers-fantastic-four/machine-learning-client/plant-ml-env/bin/python3.11" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re
