@@ -124,7 +124,7 @@ def create_dataloader(img_dir, labels, transform):
         shuffle=True,
         num_workers=4 if torch.cuda.is_available() else 0,
         pin_memory=True,
-    )  # 将 DataLoader 参数分为多行以符合行长限制
+    )
 
 
 def main():

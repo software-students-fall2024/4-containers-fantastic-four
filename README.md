@@ -33,6 +33,8 @@ To set up this project locally, follow these steps:
     ```
 
 2. **Create a virtual environment**:
+    - make sure to create `env.` file under both `web-app` and `machine-learning-client` folder
+    - create a virtual environment
     ```bash
     python -m venv flower-env
     source flower-env/bin/activate  # On Windows use `flower-env\Scripts\activate`
@@ -61,7 +63,7 @@ To set up this project locally, follow these steps:
     docker-compose up --build
     ```
 
-    - This will start the Flask app inside the container and map it to port 5001 on your host machine. You can access the application at http://localhost:5001. The machine learning client will map to port 3000.
+    - This will start the Flask app inside the container and map it to port 5001 on your host machine. You can access the application at http://127.0.0.1:5001/. The machine learning client will map to port 3000.
 
 
 ## Machine Learning Client Usage:

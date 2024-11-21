@@ -82,9 +82,11 @@ def main(image_path):
     model = load_model()  # Load the pre-trained model
     plant_name = predict_plant(image_path, model, flower_names)
     print(f"Predicted plant: {plant_name}")
+```
 
 # Example usage with a test image path
-main('data/flowers-102/jpg/image_08004.jpg')  # Adjust the image path as needed
+```main('data/flowers-102/jpg/image_08004.jpg')  # Adjust the image path as needed
+```
 
 
 ### How to Build and Run the Docker Container
