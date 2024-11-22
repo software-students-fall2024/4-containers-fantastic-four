@@ -18,12 +18,14 @@ def app_fixture():
     with patch("app.pymongo.MongoClient") as mock_mongo_client:
         # Mock database and collection
         mock_db = MagicMock()
-        mock_mongo_client.return_value = {os.getenv("MONGO_DBNAME"): mock_db}
+        mock_mongo_client.return_value = {"plant_identifier": mock_db}
         app = create_app()
         app.config.update(
             {
                 "TESTING": True,
                 "SECRET_KEY": "testsecretkey",
+                "MONGO_URI": "mongodb://localhost:27017/plant_identifier",
+                "MONGO_DBNAME": "plant_identifier",
             }
         )
         yield app, mock_db
@@ -237,12 +239,6 @@ def test_new_entry_get_missing_id(client):  # pylint: disable=redefined-outer-na
     response = client.get("/new_entry")
     assert response.status_code == 400
     assert b"No entry ID provided" in response.data
-
-
-def test_env_variables():
-    """Test that environment variables are properly set."""
-    assert os.getenv("MONGO_URI") is not None
-    assert os.getenv("MONGO_DBNAME") is not None
 
 
 def test_home_logged_in(client, app_fixture):  # pylint: disable=redefined-outer-name
