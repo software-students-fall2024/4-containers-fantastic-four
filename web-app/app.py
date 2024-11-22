@@ -153,12 +153,14 @@ def register_entry_routes(app, db):
             return redirect(url_for("results", filename=filename))
         return render_template("upload.html")
 
+
     @app.route("/results/<filename>")
     def results(filename):
         result = db.predictions.find_one({"photo": filename})
         if result:
             return render_template("results.html", result=result)
         return handle_error("Result not found", 404)
+
 
     @app.route("/new_entry", methods=["GET", "POST"])
     def new_entry():
